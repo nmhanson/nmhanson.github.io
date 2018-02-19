@@ -1,2 +1,2 @@
 <?php
-    echo "Does .github.io support php? Yes!"
+    echo "Does .github.io support php? Yes!";
