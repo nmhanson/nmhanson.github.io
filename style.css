@@ -40,8 +40,8 @@ label {
 label:before {
   content: "";
   position: absolute;
-  top: 80%;
-  left: 80%;
+  top: 60%;
+  left: 60%;
   width: 1em;
   height: 0.15em;
   background: white;
