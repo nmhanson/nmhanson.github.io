@@ -1,9 +1,7 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
-}
-body p {
-  width: 60%
+  width: 50%
 }
 .menu-container {
   position: absolute;
