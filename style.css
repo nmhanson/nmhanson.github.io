@@ -39,9 +39,9 @@ label {
 }
 label:before {
   content: "";
-  position: static;
-  left: 10px;
-  top: 10px;
+  position: absolute;
+  left: 65%;
+  top: 65%;
   width: 1em;
   height: 0.15em;
   background: white;
