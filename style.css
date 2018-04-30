@@ -1,7 +1,8 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
-  width: 50%
+  margin-left: 20vw;
+  margin-right: 20vw;
 }
 .menu-container {
   position: absolute;
