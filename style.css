@@ -41,7 +41,7 @@ label:before {
   content: "";
   position: absolute;
   top: 65%;
-  left: 65%;
+  left: 100px;
   width: 1em;
   height: 0.15em;
   background: white;
