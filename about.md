@@ -30,12 +30,12 @@ work with PHP, and have investigated similar frameworks for PHP (e.g.
 
 # Interests
 
-Recently, I've taken a strong interest in [Rust], a newer systems language by
-Mozilla which is growing by the day. So far, the learning curve has been steep,
-but it seems powerful to say the least. Given the amount of web development I've
-done, I should be more familiar with JavaScript, so I have recently taken an
-interest in teaching myself the useful and unique JavaScript constructs whenever
-I have the free time.
+Recently, I've taken a strong interest in [Rust], a newer systems language
+sponsored by Mozilla which is growing by the day. So far, the learning curve
+has been steep, but it has proven to be a fun challenge. Given the amount of web
+development I've done, I should be more familiar with JavaScript, so I have
+recently taken an interest in teaching myself the useful and unique JavaScript
+constructs whenever I have the free time.
 
 **Please look at my [résumé](/assets/nmhanson2018-resume.pdf).**
 
