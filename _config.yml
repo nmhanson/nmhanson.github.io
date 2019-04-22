@@ -1,8 +1,7 @@
 title: Nathan Hanson
 email: nmhanson23@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-    Thanks for checking out my site, please ignore the bugs 
-    and other eyesores - I am not a designer.
+    Hello!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://nmhanson.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: nmhanson
