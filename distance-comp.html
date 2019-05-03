@@ -1,26 +1,119 @@
+---
+title: Distance Competition 05/2019
+layout: page
+---
+
 <!DOCTYPE html>
+<style>
+    div {
+        margin: 1em;
+    }
+</style>
+
 <body>
-    <div id="team-distances">
-        LOADING ... 
+    <div id="loaded" style="display: inline-block;">
+        <h2 id="leader"></h2>
+        <hr>
+        <div id="sea-slug-vis">
+            <h3>Sea Slugs</h3>
+            <p><b>Total: </b><span id="sea-slug-total"></span></p>
+            <canvas id="sea-slug-chart"></canvas>
+            <ul>
+                <li id="Nate"></li>
+                <li id="Jack"></li>
+                <li id="Anna"></li>
+            </ul>
+        </div>
+        <br>
+        <hr>
+        <div id="cerner-slug-vis">
+            <h3>Cerner Slugs</h3>
+            <p><b>Total: </b><span id="cerner-slug-total"></span></p>
+            <canvas id="cerner-slug-chart"></canvas>
+            <ul>
+                <li id="Mark"></li>
+                <li id="Lily"></li>
+                <li id="Thomas"></li>
+            </ul>
+        </div>
     </div>
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
     const http = new XMLHttpRequest();
     const url = 'https://86wlbz224j.execute-api.us-east-2.amazonaws.com/default/Distance_Comp_Tracker';
     http.open("GET", url);
     http.send();
 
-    http.onreadystatechange=(e)=>{
-        const d = JSON.parse(http.response)['body'];
-        const sea_slug_total = d['Nate'] + d['Jack'] + d['Anna'];
-        const cerner_slug_total = d['Mark'] + d['Lily'] + d['Thomas']
-        document.getElementById('team-distances').innerHTML = 
-        '<p><b>Sea Slugs: </b>' + metersToMiles(sea_slug_total) + ' miles</p>' +
-        '<p><b>Cerner Slugs: </b>' + metersToMiles(cerner_slug_total) + ' miles</p>';
+
+    const metersToMiles = (meters) => {
+        return (meters / 1609.344).toFixed(2)
     }
 
-    function metersToMiles(meters) {
-        return (meters / 1609.344).toFixed(2)
+    http.onreadystatechange = (e) => {
+        const d = JSON.parse(http.response)['body'];
+
+        const sea_slugs = {
+            'Nate': d['Nate'],
+            'Jack': d['Jack'],
+            'Anna': d['Anna']
+        };
+
+        sea_slug_colors = [
+            '#78c0e0',
+            '#2b4570',
+            '#73fbd3'
+        ];
+
+        const cerner_slugs = {
+            'Mark': d['Mark'],
+            'Lily': d['Lily'],
+            'Thomas': d['Thomas']
+        };
+
+        const cerner_slug_colors = [
+            '#89023e',
+            '#ea638c',
+            '#ff0054'
+        ];
+
+        const sea_slug_total = Object.values(sea_slugs).reduce((prv, current) => prv + current);
+        const cerner_slug_total = Object.values(cerner_slugs).reduce((prv, current) => prv + current);
+        const leaders = sea_slug_total > cerner_slug_total ? 'Sea Slugs' : 'Cerner Slugs';
+
+        document.getElementById('leader').innerHTML = `${leaders} are currently winning by ${metersToMiles(Math.abs(sea_slug_total - cerner_slug_total))} miles!`
+        document.getElementById('sea-slug-total').innerHTML = metersToMiles(sea_slug_total);
+        document.getElementById('cerner-slug-total').innerHTML = metersToMiles(cerner_slug_total);
+
+        for (const person in d) {
+            document.getElementById(person).innerHTML = `<b>${person}</b>: ${metersToMiles(d[person])} miles`;
+        }
+
+        let sea_slug_ctx = document.getElementById('sea-slug-chart').getContext('2d');
+        let sea_slug_chart = new Chart(sea_slug_ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(sea_slugs),
+                datasets: [{
+                    data: Object.values(sea_slugs).map(metersToMiles),
+                    backgroundColor: sea_slug_colors
+                }]
+            },
+            options: {}
+        });
+
+        let cerner_slug_ctx = document.getElementById('cerner-slug-chart').getContext('2d');
+        let cerner_slug_chart = new Chart(cerner_slug_ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(cerner_slugs),
+                datasets: [{
+                    data: Object.values(cerner_slugs).map(metersToMiles),
+                    backgroundColor: cerner_slug_colors
+                }]
+            },
+            options: {}
+        });
     }
 </script>
