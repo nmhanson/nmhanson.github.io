@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<body>
+    <div id="team-distances">
+        LOADING ... 
+    </div>
+</body>
+
+<script>
+    const http = new XMLHttpRequest();
+    const url = 'https://86wlbz224j.execute-api.us-east-2.amazonaws.com/default/Distance_Comp_Tracker';
+    http.open("GET", url);
+    http.send();
+
+    http.onreadystatechange=(e)=>{
+        const d = JSON.parse(http.response)['body'];
+        const sea_slug_total = d['Nate'] + d['Jack'] + d['Anna'];
+        const cerner_slug_total = d['Mark'] + d['Lily'] + d['Thomas']
+        document.getElementById('team-distances').innerHTML = 
+        '<p><b>Sea Slugs: </b>' + metersToMiles(sea_slug_total) + ' miles</p>' +
+        '<p><b>Cerner Slugs: </b>' + metersToMiles(cerner_slug_total) + ' miles</p>';
+    }
+
+    function metersToMiles(meters) {
+        return (meters / 1609.344).toFixed(2)
+    }
+</script>
