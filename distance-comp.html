@@ -83,8 +83,8 @@ layout: page
         const leaders = sea_slug_total > cerner_slug_total ? 'Sea Slugs' : 'Cerner Slugs';
 
         document.getElementById('leader').innerHTML = `${leaders} are currently winning by ${metersToMiles(Math.abs(sea_slug_total - cerner_slug_total))} miles!`
-        document.getElementById('sea-slug-total').innerHTML = metersToMiles(sea_slug_total) + 'miles';
-        document.getElementById('cerner-slug-total').innerHTML = metersToMiles(cerner_slug_total) + 'miles';
+        document.getElementById('sea-slug-total').innerHTML = `${metersToMiles(sea_slug_total)} miles`;
+        document.getElementById('cerner-slug-total').innerHTML = `${metersToMiles(cerner_slug_total)} miles`;
 
         for (const person in d) {
             document.getElementById(person).innerHTML = `<b>${person}</b>: ${metersToMiles(d[person])} miles`;
