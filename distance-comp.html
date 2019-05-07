@@ -11,7 +11,12 @@ layout: page
 </style>
 
 <body>
-    <div id="loaded" style="display: inline-block;">
+    <div id="loadingText" style="display: block;">
+        <b>
+            Loading ...
+        </b>
+    </div>
+    <div id="loaded" style="display: none;">
         <h2 id="leader"></h2>
         <hr>
         <div id="sea-slug-vis">
@@ -52,7 +57,27 @@ layout: page
     }
 
     http.onreadystatechange = (e) => {
-        const d = JSON.parse(http.response)['body'];
+        // Show the page.
+        document.getElementById('loaded').style.display = 'block';
+
+        // Hide the loading text.
+        document.getElementById('loadingText').style.display = 'none';
+
+        // Contacting AWS lambda failed.
+        if(http.status != 200) {
+            document.getElementById('loaded').innerHTML = '<p> Failure contacting Lambda services. Try again later? </p>';
+            return;
+        }
+
+        const response = JSON.parse(http.response);
+
+        // AWS couldn't access MapMyRun API. Maybe expired API token?
+        if (response['statusCode'] != 200) {
+            document.getElementById('loaded').innerHTML = '<p> There was an error contacting MapMyRun. Try again later! </p>';
+            return;
+        }
+
+        const d = response['body'];
 
         const sea_slugs = {
             'Nate': d['Nate'],
